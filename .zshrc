@@ -48,9 +48,10 @@ alias home="cd ~"
 alias desktop="cd ~/Desktop"
 alias backup="/Users/lennonallen/scripts/obsidian_backup.sh"
 alias gitdate="git add -A && git commit -m 'Update: $(date)'"
+alias dot="cd ~/dotfiles"
 
 # Edit ~/.zshrc
-nano ~/.zshrc
+# nano ~/.zshrc
 
 # Replace your note function with this absolute path version:
 note() {
@@ -72,14 +73,4 @@ note() {
 
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
-
-
-#fzf cd shortcut
-cdt() {
-    cd "$1" 2>/dev/null || return
-    local selected=$(fzf --preview 'cat {}' --preview-window=right:60%:wrap)
-    if [[ -n "$selected" ]]; then
-        print -z "$selected"  # This puts the selection on the command line
-    fi
-}
+# source <(fzf --zsh)
