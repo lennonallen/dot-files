@@ -47,6 +47,7 @@ alias o="cd ~/My_Sync_Vault"
 alias home="cd ~"
 alias desktop="cd ~/Desktop"
 alias backup="/Users/lennonallen/scripts/obsidian_backup.sh"
+alias gitdate="git add -A && git commit -m 'Update: $(date)'"
 
 # Edit ~/.zshrc
 nano ~/.zshrc
