@@ -29,7 +29,7 @@ setopt PROMPT_SUBST
 # Build the prompt with git dirty status
 PROMPT="${bold}
 ${orange}%n${white} at ${yellow}%m${white} in ${green}%~${white}\$(git_dirty_status)
-${white}$ ${reset}"
+${white}▶ ${reset}"
 
 # Single line version:
 # PROMPT="${bold}${orange}%n${white} at ${yellow}%m${white} in ${green}%~${white}\$(git_dirty_status) ${white}$ ${reset}"
