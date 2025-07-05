@@ -73,4 +73,4 @@ note() {
 
 
 # Set up fzf key bindings and fuzzy completion
-# source <(fzf --zsh)
+ source <(fzf --zsh)
