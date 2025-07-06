@@ -8,3 +8,5 @@
 	email = lennonallen85@icloud.com
 [init]
 	defaultBranch = master
+[core]
+	excludesfile = /Users/lennonallen/.gitignore_global
