@@ -46,9 +46,10 @@ alias c="clear"
 alias o="cd ~/My_Sync_Vault"
 alias home="cd ~"
 alias desktop="cd ~/Desktop"
-alias backup="/Users/lennonallen/scripts/obsidian_backup.sh"
+alias backup='~/Library/shell_scripts/obsidian_backup.sh'
 alias gitdate="git add -A && git commit -m 'Update: $(date)'"
 alias dot="cd ~/dotfiles"
+alias scripts='cd ~/Library/Scripts'
 
 # Edit ~/.zshrc
 # nano ~/.zshrc

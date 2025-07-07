@@ -1,0 +1,6 @@
+.DS_Store
+.Trash
+*.tmp
+*.log
+__pycache__/
+*.pyc
