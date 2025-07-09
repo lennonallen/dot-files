@@ -1,0 +1,24 @@
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Node.js
+node_modules/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Trash and metadata
+.Trashes
+.Spotlight-V100
+.fseventsd
+
+# Temporary files
+*.swp
+*.tmp
+*.bak
