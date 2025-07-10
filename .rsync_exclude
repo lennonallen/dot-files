@@ -1,24 +1,27 @@
-# Git
 .git/
 .gitignore
 .gitattributes
-
-# Node.js
 node_modules/
-
-# macOS system files
 .DS_Store
 .AppleDouble
 .LSOverride
 Icon?
 ._*
-
-# Trash and metadata
 .Trashes
 .Spotlight-V100
 .fseventsd
-
-# Temporary files
 *.swp
 *.tmp
 *.bak
+.Trash
+.zsh_sessions
+.DS_Store
+**/.DS_Store
+Library/Caches
+Library/Logs
+Library/Application Support/Crash Reports
+Library/Application Support/CallHistoryDB
+Library/Application Support/CallHistoryTransactions
+Library/Cookies
+Library/Saved Application State
+Library/WebKit
