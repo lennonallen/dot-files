@@ -38,6 +38,7 @@ ${white}▶ ${reset}"
 
 # Aliases
 alias ll="ls -la"
+alias zshrc='subl ~/.zshrc'
 alias t5='cd /Volumes/Samsung_T5'
 alias ..="cd .."
 alias ...="cd ../.."
