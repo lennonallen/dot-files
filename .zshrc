@@ -51,7 +51,7 @@ alias desktop="cd ~/Desktop"
 alias gitdate="git add -A && git commit -m 'Update: $(date)'"
 alias dot="cd ~/dotfiles"
 alias scripts='cd ~/Library/Scripts'
-alias backup_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' --delete ~/My_Sync_Vault ~/Desktop/back_up_desktop'
+alias backup_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' --delete ~/My_Sync_Vault ~/backups'
 alias restore_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' ~/Desktop/back_up_desktop/My_Sync_Vault/ ~/My_Sync_Vault/'
 
 # Edit ~/.zshrc
