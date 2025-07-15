@@ -37,6 +37,19 @@ ${white}▶ ${reset}"
 
 
 # Aliases
+alias status='for dir in */; do
+  if [ -d "$dir/.git" ]; then
+    echo "=== $dir ==="
+    cd "$dir"
+    if [[ -n $(git status --porcelain) ]]; then
+      git status --short
+    else
+      echo "Clean"
+    fi
+    cd ..
+    echo ""
+  fi
+done'
 alias ll="ls -la"
 alias gitdirs="find . -name '.git' -type d | sed 's|/.git||'"
 alias zshrc='subl ~/.zshrc'
