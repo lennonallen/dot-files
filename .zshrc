@@ -38,6 +38,7 @@ ${white}▶ ${reset}"
 
 # Aliases
 alias ll="ls -la"
+alias gitdirs="find . -name '.git' -type d | sed 's|/.git||'"
 alias zshrc='subl ~/.zshrc'
 alias t5='cd /Volumes/Samsung_T5'
 alias ..="cd .."
