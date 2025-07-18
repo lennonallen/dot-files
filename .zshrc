@@ -1,6 +1,6 @@
-# Custom Zsh Prompt with Git Dirty Status - Add to ~/.zshrc
-
-# Define colors using tput (cross-platform)
+# =========================
+# Color and Formatting Vars
+# =========================
 orange=$(tput setaf 166)
 yellow=$(tput setaf 228)
 green=$(tput setaf 71)
@@ -10,6 +10,9 @@ cyan=$(tput setaf 51)
 bold=$(tput bold)
 reset=$(tput sgr0)
 
+# =============
+# Functions
+# =============
 # Git dirty status function
 git_dirty_status() {
     if git rev-parse --git-dir > /dev/null 2>&1; then
@@ -23,6 +26,24 @@ git_dirty_status() {
     fi
 }
 
+# Note function: create and open a note in Sublime Text
+note() {
+    if [ -z "$1" ]; then
+        subl "Usage: note 'filename'"
+        return 1
+    fi
+    filename="$1"
+    # Use absolute path so it works from anywhere
+    filepath="/Users/lennonallen/My_Sync_Vault/${filename}.md"
+    # Create empty note
+    touch "$filepath"
+    # Open it for editing
+    subl "$filepath"
+}
+
+# =====================
+# Prompt Configuration
+# =====================
 # Enable command substitution
 setopt PROMPT_SUBST
 
@@ -31,12 +52,9 @@ PROMPT="${bold}
 ${orange}%n${white} at ${yellow}%m${white} in ${green}%~${white}\$(git_dirty_status)
 ${white}▶ ${reset}"
 
-# Single line version:
-# PROMPT="${bold}${orange}%n${white} at ${yellow}%m${white} in ${green}%~${white}\$(git_dirty_status) ${white}$ ${reset}"
-
-
-
+# =========
 # Aliases
+# =========
 alias status='for dir in */; do
   if [ -d "$dir/.git" ]; then
     echo "=== $dir ==="
@@ -68,27 +86,3 @@ alias scripts='cd ~/Library/Scripts'
 alias backup_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' --delete ~/My_Sync_Vault ~/backups'
 alias restore_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' ~/Desktop/back_up_desktop/My_Sync_Vault/ ~/My_Sync_Vault/'
 
-# Edit ~/.zshrc
-# nano ~/.zshrc
-
-# Replace your note function with this absolute path version:
-note() {
-    if [ -z "$1" ]; then
-        subl "Usage: note 'filename'"
-        return 1
-    fi
-    
-    filename="$1"
-    # Use absolute path so it works from anywhere
-    filepath="/Users/lennonallen/My_Sync_Vault/${filename}.md"
-    
-    # Create empty note
-    touch "$filepath"
-    
-    # Open it for editing
-    subl "$filepath"
-}
-
-
-# Set up fzf key bindings and fuzzy completion
- source <(fzf --zsh)
