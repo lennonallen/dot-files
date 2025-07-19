@@ -26,28 +26,17 @@ git_dirty_status() {
     fi
 }
 
-# Note function: create and open a note in Sublime Text
-note() {
-    if [ -z "$1" ]; then
-        subl "Usage: note 'filename'"
-        return 1
-    fi
-    filename="$1"
-    # Use absolute path so it works from anywhere
-    filepath="/Users/lennonallen/My_Sync_Vault/${filename}.md"
-    # Create empty note
-    touch "$filepath"
-    # Open it for editing
-    subl "$filepath"
-}
 
 # =====================
 # Prompt Configuration
 # =====================
+
 # Enable command substitution
+
 setopt PROMPT_SUBST
 
 # Build the prompt with git dirty status
+
 PROMPT="${bold}
 ${orange}%n${white} at ${yellow}%m${white} in ${green}%~${white}\$(git_dirty_status)
 ${white}▶ ${reset}"
@@ -55,19 +44,7 @@ ${white}▶ ${reset}"
 # =========
 # Aliases
 # =========
-alias status='for dir in */; do
-  if [ -d "$dir/.git" ]; then
-    echo "=== $dir ==="
-    cd "$dir"
-    if [[ -n $(git status --porcelain) ]]; then
-      git status --short
-    else
-      echo "Clean"
-    fi
-    cd ..
-    echo ""
-  fi
-done'
+
 alias ll="ls -la"
 alias gitdirs="find . -name '.git' -type d | sed 's|/.git||'"
 alias zshrc='subl ~/.zshrc'
@@ -85,4 +62,3 @@ alias dot="cd ~/dotfiles"
 alias scripts='cd ~/Library/Scripts'
 alias backup_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' --delete ~/My_Sync_Vault ~/backups'
 alias restore_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' ~/Desktop/back_up_desktop/My_Sync_Vault/ ~/My_Sync_Vault/'
-
