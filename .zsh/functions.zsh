@@ -20,7 +20,6 @@ cd_choose() {
     fi
   done
 }
-alias cdf="cd_choose"
 
 # Create a directory and cd into it
 mkcd() { mkdir -p "$1" && cd "$1"; } 

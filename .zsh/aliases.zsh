@@ -7,15 +7,12 @@ alias ...="cd ../.."
 alias grep="grep --color=auto"
 alias h="history"
 alias c="clear"
-alias o="cd ~/My_Sync_Vault"
 alias home="cd ~"
-alias desktop="cd ~/Desktop"
 alias gitdate="git add -A && git commit -m 'Update: $(date)'"
-alias dot="cd ~/dotfiles"
-alias scripts='cd ~/Library/Scripts'
 alias backup_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' --delete ~/My_Sync_Vault ~/backups'
 alias restore_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' ~/Desktop/back_up_desktop/My_Sync_Vault/ ~/My_Sync_Vault/' 
 alias reload='source ~/.zshrc' 
+alias cds="cd_choose"
 
 # --- Safety Aliases ---
 alias rm='rm -i'
