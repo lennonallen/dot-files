@@ -80,3 +80,8 @@ emptydir() {
     echo "Aborted."
   fi
 } 
+
+# List all custom functions defined in this file
+myfuncs() {
+  awk '/\{$/ && /^[a-zA-Z_]/ { print $1 }' ~/dotfiles/.zsh/functions.zsh
+} 
