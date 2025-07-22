@@ -13,7 +13,7 @@ alias backup_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' --
 alias restore_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' ~/Desktop/back_up_desktop/My_Sync_Vault/ ~/My_Sync_Vault/' 
 alias reload='source ~/.zshrc' 
 alias cds="cd_choose"
-alias usb-sync="bash "/Volumes/NO NAME/sync_to_usb.sh""
+alias usb-sync="bash '/Volumes/Samsung USB/sync_to_usb.sh'"
 
 # --- Safety Aliases ---
 alias rm='rm -i'
