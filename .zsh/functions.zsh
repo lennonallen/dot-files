@@ -84,3 +84,10 @@ emptydir() {
 myfuncs() {
   awk '/\{$/ && /^[a-zA-Z_]/ { print $1 }' ~/dotfiles/.zsh/functions.zsh | sort
 } 
+
+# sync drectory to server
+server-sync() {
+    echo "Syncing $(basename "$PWD") to server..."
+    rsync -avv --delete --exclude='.git' --exclude='.gitignore' --exclude='.gitconfig' --exclude='.gitignore_global' "$PWD" ssh macmini:~/Server/ && \
+    echo "✓ Sync complete!"
+}
