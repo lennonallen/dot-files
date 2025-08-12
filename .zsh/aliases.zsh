@@ -19,3 +19,6 @@ alias usb-sync="bash '/Volumes/Samsung USB/sync_to_usb.sh'"
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i' 
+
+
+source <(fzf --zsh)
