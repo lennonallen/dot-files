@@ -55,12 +55,6 @@ extract() {
   fi
 }
 
-# Find files by name (case-insensitive)
-ff() { find . -iname "*$1*"; }
-
-# Find and grep for a pattern
-fgr() { grep -rnw . -e "$1"; }
-
 # Make and enter a temporary directory inside ~/temp-directories
 mktmpd() {
   mkdir -p "$HOME/temp-directories"
@@ -80,11 +74,6 @@ emptydir() {
   fi
 } 
 
-# List all custom functions defined in this file
-myfuncs() {
-  awk '/\{$/ && /^[a-zA-Z_]/ { print $1 }' ~/dotfiles/.zsh/functions.zsh | sort
-} 
-
 # sync drectory to server
 server-sync() {
     echo "Syncing $(basename "$PWD") to server..."
@@ -92,38 +81,20 @@ server-sync() {
     echo "✓ Sync complete!"
 }
 
+# Add a task (REST API)
 
-
-twt() { task "$1" modify wait:tomorrow; }
-
-tadd() {
-    local tags=$(task tags | fzf --multi | awk '{print $1}' | sed 's/^/+/' | tr '\n' ' ' | sed 's/ *$//')
-    local desc="$*"
-    if [ -n "$tags" ]; then
-        eval "task add $tags \"$desc\""
-    else
-        task add "$desc"
-    fi
+    todoist() {
+    local content="$1"
+    local due="${2:-}"
+    local priority="${3:-1}"
+    
+    curl "https://api.todoist.com/rest/v2/tasks" \
+        -X POST \
+        --data "{\"content\": \"$content\", \"due_string\": \"$due\", \"due_lang\": \"en\", \"priority\": $priority}" \
+        -H "Content-Type: application/json" \
+        -H "X-Request-Id: $(uuidgen)" \
+        -H "Authorization: Bearer b142f47bb9363d5e65455800f36c65efaffc2b4a"
 }
 
-dot() {
-    nvim $(find ~/dotfiles -type f ! -path "*/.git/*" | fzf --preview 'cat {}')
-}
-
-nmd() {
-	nvim "$(find ~/My_Sync_Vault -name "*.md" | fzf --preview 'cat {}')"
-}
-
-
-vimedit() {
-	nvim +/"$(cat $1 | fzf)" $1
-}
-
-
-taskd() {
-	task $(task all status.not:deleted | fzf -m | awk '{print $1}') delete
-}
-
-myfolder() {
-	 cd $(find ~/my-folder -type d | fzf) && ls
- }
+# Usage:
+# todoist "Buy Milk" "tomorrow at 12:00" 4
