@@ -92,71 +92,34 @@ server-sync() {
     echo "✓ Sync complete!"
 }
 
-# Quickly add a Taskwarrior task with prompts
-tadd() {
-  if ! command -v task >/dev/null 2>&1; then
-    echo "Taskwarrior ('task') not found. Install it first."
-    return 1
-  fi
 
-  local description project due priority tags_input tag
-
-  printf "Task description: "
-  read -r description
-  if [[ -z "$description" ]]; then
-    echo "Aborted: description is required."
-    return 1
-  fi
-
-  printf "Project (optional): "
-  read -r project
-
-  printf "Due (e.g., tomorrow, 2025-08-09) (optional): "
-  read -r due
-
-  printf "Priority [H/M/L] (optional): "
-  read -r priority
-  if [[ "$priority" != "H" && "$priority" != "M" && "$priority" != "L" ]]; then
-    priority=""
-  fi
-
-  printf "Tags (space or comma-separated, optional): "
-  read -r tags_input
-
-  local cmd
-  cmd=(task add)
-
-  if [[ -n "$project" ]]; then
-    cmd+=("project:$project")
-  fi
-  if [[ -n "$due" ]]; then
-    cmd+=("due:$due")
-  fi
-  if [[ -n "$priority" ]]; then
-    cmd+=("priority:$priority")
-  fi
-  if [[ -n "$tags_input" ]]; then
-    tags_input="${tags_input//,/ }"
-    for tag in $tags_input; do
-      [[ -n "$tag" ]] && cmd+=("+$tag")
-    done
-  fi
-
-  cmd+=("$description")
-
-  printf "Adding: "
-  printf "%q " "${cmd[@]}"
-  echo
-  "${cmd[@]}"
-}
 
 twt() { task "$1" modify wait:tomorrow; }
 
-# fd - cd to selected directory
+tadd() {
+    local tags=$(task tags | fzf --multi | awk '{print $1}' | sed 's/^/+/' | tr '\n' ' ' | sed 's/ *$//')
+    local desc="$*"
+    if [ -n "$tags" ]; then
+        eval "task add $tags \"$desc\""
+    else
+        task add "$desc"
+    fi
+}
 
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
+dot() {
+    nvim $(find ~/dotfiles -type f ! -path "*/.git/*" | fzf --preview 'cat {}')
+}
+
+nmd() {
+	nvim "$(find ~/My_Sync_Vault -name "*.md" | fzf --preview 'cat {}')"
+}
+
+
+vimedit() {
+	nvim +/"$(cat $1 | fzf)" $1
+}
+
+
+taskd() {
+	task $(task all status.not:deleted | fzf -m | awk '{print $1}') delete
 }

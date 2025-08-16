@@ -20,5 +20,9 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i' 
 
-
 source <(fzf --zsh)
+
+alias fzrm='rm $(ls -p | fzf)'
+
+export FZF_DEFAULT_OPTS='--prompt="🔍" --margin 3% --height 80% --layout=reverse --border --color=bg+:240,bg:235,fg:252,header:25,info:166,pointer:161,marker:161,spinner:161,hl:7,hl+:7'
+
