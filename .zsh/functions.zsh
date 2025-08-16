@@ -123,3 +123,7 @@ vimedit() {
 taskd() {
 	task $(task all status.not:deleted | fzf -m | awk '{print $1}') delete
 }
+
+myfolder() {
+	 cd $(find ~/my-folder -type d | fzf) && ls
+ }
