@@ -22,9 +22,8 @@ myfolder() {
 
 paths() {
     local selected
-    selected=$(cat -n /Users/lennonallen/my-folder/paths.txt | fzf )
+    selected=$(cat -n /Users/lennonallen/my-folder/paths.txt | fzf | awk '{print $2}')
     if [[ -n "$selected" ]]; then
         cd "$selected" && ls
     fi
-    
 }
