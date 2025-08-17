@@ -22,7 +22,7 @@ myfolder() {
 
 paths() {
     local selected
-    selected=$(cat /Users/lennonallen/my-folder/paths.txt | fzf --delimiter=" " --with-nth=1 --accept-nth=2 --preview 'ls {2}')
+    selected=$(cat -n /Users/lennonallen/my-folder/paths.txt | fzf )
     if [[ -n "$selected" ]]; then
         cd "$selected" && ls
     fi
