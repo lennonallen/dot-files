@@ -5,7 +5,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias h="history"
 alias c="clear"
-alias home="cd ~"
+alias home="cd ~ && clear"
 alias gitdate="git add -A && git commit -m 'Update: $(date)'"
 alias backup_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' --delete ~/My_Sync_Vault ~/backups'
 alias restore_obsidian='rsync -a -r -v --exclude='.git' --exclude='.gitignore' ~/Desktop/back_up_desktop/My_Sync_Vault/ ~/My_Sync_Vault/' 
@@ -20,7 +20,7 @@ alias mv='mv -i'
 
 source <(fzf --zsh)
 
-alias fzrm='rm $(ls -p | fzf)'
+alias fzrm='rm "$(ls -p | fzf)"'
 
 export FZF_DEFAULT_OPTS='--prompt="🔍" --margin 3% --height 80% --layout=reverse --border --color=bg+:240,bg:235,fg:252,header:25,info:166,pointer:161,marker:161,spinner:161,hl:7,hl+:7'
 
