@@ -98,3 +98,17 @@ server-sync() {
 
 # Usage:
 # todoist "Buy Milk" "tomorrow at 12:00" 4
+#
+
+proton-sync() {
+    echo "Syncing $(basename "$PWD") to proton drive..."
+    rsync -av --delete --ignore-errors --exclude='.DS_Store' --exclude='.git' --exclude='.gitignore' --exclude='.gitconfig' --exclude='.gitignore_global' "$PWD" ~/Library/CloudStorage/ProtonDrive-lennonallen85@proton.me-folder 
+    echo "✓ Sync complete!"
+}
+
+
+
+
+
+
+#
