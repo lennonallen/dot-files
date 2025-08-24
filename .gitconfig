@@ -9,4 +9,4 @@
 [init]
 	defaultBranch = master
 [core]
-	excludesfile = /Users/lennonallen/.gitignore_global
+	excludesfile = /Users/lennonallen/dotfiles/.gitignore_global

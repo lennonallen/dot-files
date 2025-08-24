@@ -16,3 +16,6 @@ compinit
 # End of Docker CLI completions
 # Add this to your ~/.zshrc file:
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/ohmyposh_theme.omp.json)"
+
+
+export EDITOR=nvim
