@@ -19,3 +19,4 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/ohmyposh_theme.
 
 
 export EDITOR=nvim
+export PATH="$PATH:$HOME/.local/bin"
