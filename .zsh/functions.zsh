@@ -73,14 +73,6 @@ emptydir() {
     echo "Aborted."
   fi
 } 
-
-# sync drectory to server
-server-sync() {
-    echo "Syncing $(basename "$PWD") to server..."
-    rsync -av --delete --ignore-errors --exclude='.git' --exclude='.gitignore' --exclude='.gitconfig' --exclude='.gitignore_global' "$PWD" ssh macmini:~/Server
-    echo "✓ Sync complete!"
-}
-
 # Add a task (REST API)
 
     todoist() {
@@ -105,33 +97,9 @@ proton-sync() {
     rsync -av --delete --ignore-errors --exclude='.DS_Store' --exclude='.git' --exclude='.gitignore' --exclude='.gitconfig' --exclude='.gitignore_global' "$PWD" ~/Library/CloudStorage/ProtonDrive-lennonallen85@proton.me-folder 
     echo "✓ Sync complete!"
 }
-
-new() {
-  # Get current directory name and its parent
-  CURRENT_DIR=$(basename "$PWD")
-  PARENT_DIR=$(dirname "$PWD")
-  
-  # Set destination path
-  DEST_PATH="/Volumes/256G"
-  
-  # Check if destination exists
-  if [ ! -d "$DEST_PATH" ]; then
-    echo "❌ Destination not found: $DEST_PATH"
-    exit 1
-  fi
-  
-  # Set path to exclude file
-  EXCLUDE_FILE="$HOME/dotfiles/.rsync_exclude"
-  
-  # Check if exclude file exists
-  if [ ! -f "$EXCLUDE_FILE" ]; then
-    echo "❌ Exclude file not found: $EXCLUDE_FILE"
-    exit 1
-  fi
-  
-  # Run rsync from parent directory
-  rsync -a -v -h -r --delete \
-    --exclude-from="$EXCLUDE_FILE" \
-    "$PARENT_DIR/$CURRENT_DIR" \
-    "$DEST_PATH/"
+# sync drectory to server
+server-sync() {
+    echo "Syncing $(basename "$PWD") to server..."
+    rsync -av --delete --ignore-errors --exclude='.git' --exclude='.gitignore' --exclude='.gitconfig' --exclude='.gitignore_global' "$PWD" ssh macmini:~/Server
+    echo "✓ Sync complete!"
 }
