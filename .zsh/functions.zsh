@@ -106,9 +106,32 @@ proton-sync() {
     echo "✓ Sync complete!"
 }
 
-
-
-
-
-
-#
+new() {
+  # Get current directory name and its parent
+  CURRENT_DIR=$(basename "$PWD")
+  PARENT_DIR=$(dirname "$PWD")
+  
+  # Set destination path
+  DEST_PATH="/Volumes/256G"
+  
+  # Check if destination exists
+  if [ ! -d "$DEST_PATH" ]; then
+    echo "❌ Destination not found: $DEST_PATH"
+    exit 1
+  fi
+  
+  # Set path to exclude file
+  EXCLUDE_FILE="$HOME/dotfiles/.rsync_exclude"
+  
+  # Check if exclude file exists
+  if [ ! -f "$EXCLUDE_FILE" ]; then
+    echo "❌ Exclude file not found: $EXCLUDE_FILE"
+    exit 1
+  fi
+  
+  # Run rsync from parent directory
+  rsync -a -v -h -r --delete \
+    --exclude-from="$EXCLUDE_FILE" \
+    "$PARENT_DIR/$CURRENT_DIR" \
+    "$DEST_PATH/"
+}
