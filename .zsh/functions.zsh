@@ -2,13 +2,13 @@
 cd_choose() {
  local dirs=(
   "$HOME"
-  "$HOME/My_Sync_Vault"
+  "${MY_SYNC_VAULT:-$HOME/My_Sync_Vault}"
   "$HOME/Desktop"
-  "$HOME/backups"
+  "${BACKUPS_DIR:-$HOME/backups}"
   "$HOME/Library/Scripts"
   "$HOME/dotfiles"
-  "$HOME/temp-directories"
-  "$HOME/archives"
+  "${TEMP_DIRECTORIES:-$HOME/temp-directories}"
+  "${ARCHIVES_DIR:-$HOME/archives}"
  )
   echo "Choose a directory:"
   select dir in "${dirs[@]}"; do
@@ -57,8 +57,9 @@ extract() {
 
 # Make and enter a temporary directory inside ~/temp-directories
 mktmpd() {
-  mkdir -p "$HOME/temp-directories"
-  tmpd=$(mktemp -d "$HOME/temp-directories/tmp.XXXXXXXXXX") && cd "$tmpd"
+  local temp_dir="${TEMP_DIRECTORIES:-$HOME/temp-directories}"
+  mkdir -p "$temp_dir"
+  tmpd=$(mktemp -d "$temp_dir/tmp.XXXXXXXXXX") && cd "$tmpd"
 } 
 
 # Delete all contents of the current directory (with confirmation)
@@ -76,16 +77,26 @@ emptydir() {
 # Add a task (REST API)
 
     todoist() {
+    if [[ -z "$TODOIST_API_TOKEN" ]]; then
+        echo "Error: TODOIST_API_TOKEN not set. Please set it in your .env file." >&2
+        return 1
+    fi
+    
     local content="$1"
     local due="${2:-}"
     local priority="${3:-1}"
+    
+    if [[ -z "$content" ]]; then
+        echo "Usage: todoist 'task content' ['due date'] [priority]" >&2
+        return 1
+    fi
     
     curl "https://api.todoist.com/rest/v2/tasks" \
         -X POST \
         --data "{\"content\": \"$content\", \"due_string\": \"$due\", \"due_lang\": \"en\", \"priority\": $priority}" \
         -H "Content-Type: application/json" \
         -H "X-Request-Id: $(uuidgen)" \
-        -H "Authorization: Bearer b142f47bb9363d5e65455800f36c65efaffc2b4a"
+        -H "Authorization: Bearer $TODOIST_API_TOKEN"
 }
 
 # Usage:
@@ -93,13 +104,46 @@ emptydir() {
 #
 
 proton-sync() {
-    echo "Syncing $(basename "$PWD") to proton drive..."
-    rsync -av --delete --ignore-errors --exclude='.DS_Store' --exclude='.git' --exclude='.gitignore' --exclude='.gitconfig' --exclude='.gitignore_global' "$PWD" ~/Library/CloudStorage/ProtonDrive-lennonallen85@proton.me-folder 
-    echo "✓ Sync complete!"
+    if [[ -z "$PROTON_DRIVE_PATH" ]]; then
+        echo "Error: PROTON_DRIVE_PATH not set in .env file" >&2
+        return 1
+    fi
+    
+    if [[ ! -d "$PROTON_DRIVE_PATH" ]]; then
+        echo "Error: ProtonDrive directory not found at $PROTON_DRIVE_PATH" >&2
+        return 1
+    fi
+    
+    local current_dir=$(basename "$PWD")
+    echo "Syncing $current_dir to ProtonDrive..."
+    
+    if rsync -av --delete --ignore-errors --exclude-from="$HOME/dotfiles/.rsync_exclude" "$PWD" "$PROTON_DRIVE_PATH"; then
+        echo "✓ Sync complete!"
+    else
+        echo "✗ Sync failed!" >&2
+        return 1
+    fi
 }
 # sync drectory to server
 server-sync() {
-    echo "Syncing $(basename "$PWD") to server..."
-    rsync -av --delete --ignore-errors --exclude='.git' --exclude='.gitignore' --exclude='.gitconfig' --exclude='.gitignore_global' "$PWD" ssh macmini:~/Server
-    echo "✓ Sync complete!"
+    if [[ -z "$REMOTE_SERVER" || -z "$REMOTE_PATH" ]]; then
+        echo "Error: REMOTE_SERVER or REMOTE_PATH not set in .env file" >&2
+        return 1
+    fi
+    
+    # Test SSH connection
+    if ! ssh -o ConnectTimeout=5 -o BatchMode=yes "$REMOTE_SERVER" true 2>/dev/null; then
+        echo "Error: Cannot connect to $REMOTE_SERVER" >&2
+        return 1
+    fi
+    
+    local current_dir=$(basename "$PWD")
+    echo "Syncing $current_dir to $REMOTE_SERVER..."
+    
+    if rsync -av --delete --ignore-errors --exclude-from="$HOME/dotfiles/.rsync_exclude" "$PWD" "$REMOTE_SERVER:$REMOTE_PATH"; then
+        echo "✓ Sync complete!"
+    else
+        echo "✗ Sync failed!" >&2
+        return 1
+    fi
 }

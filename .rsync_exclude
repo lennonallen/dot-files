@@ -1,7 +1,25 @@
+# Version Control
 .git/
 .gitignore
 .gitattributes
+.gitconfig
+.gitignore_global
+.svn/
+.hg/
+.bzr/
+
+# Dependencies
 node_modules/
+vendor/
+bower_components/
+.npm/
+.pnpm-store/
+__pycache__/
+.venv/
+venv/
+env/
+
+# macOS System Files
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -10,18 +28,92 @@ Icon?
 .Trashes
 .Spotlight-V100
 .fseventsd
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Temporary and Cache Files
 *.swp
+*.swo
 *.tmp
+*.temp
 *.bak
+*.backup
+*.orig
+*~
+.#*
+\#*#
 .Trash
 .zsh_sessions
-.DS_Store
-**/.DS_Store
-Library/Caches
-Library/Logs
-Library/Application Support/Crash Reports
-Library/Application Support/CallHistoryDB
-Library/Application Support/CallHistoryTransactions
-Library/Cookies
-Library/Saved Application State
-Library/WebKit
+.bash_sessions
+.lesshst
+.python_history
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs and compiled files
+dist/
+build/
+target/
+out/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.class
+*.pyc
+*.pyo
+*.pyd
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-*
+.vim/
+.emacs.d/
+.atom/
+
+# Environment and sensitive files
+.env
+.env.local
+.env.production
+.env.staging
+*.pem
+*.key
+.aws/
+.ssh/
+config/secrets.yml
+secrets/
+
+# macOS Library directories
+Library/Caches/
+Library/Logs/
+Library/Application Support/Crash Reports/
+Library/Application Support/CallHistoryDB/
+Library/Application Support/CallHistoryTransactions/
+Library/Cookies/
+Library/Saved Application State/
+Library/WebKit/
+Library/Preferences/com.apple.*
+
+# Development databases
+*.sqlite
+*.db
+*.sqlite3
+
+# Documentation build outputs
+_site/
+.jekyll-cache/
+.sass-cache/
+docs/_build/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
