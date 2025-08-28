@@ -14,7 +14,7 @@ export PAGER="${PAGER:-less}"
 
 # PATH modifications
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="~/.npm-global/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH" 
 
 # Less configuration for better pager experience
 export LESS='-R -S -M -i -j5'

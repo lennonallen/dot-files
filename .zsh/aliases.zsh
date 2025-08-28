@@ -82,3 +82,13 @@ alias flushdns='sudo dscacheutil -flushcache'   # Flush DNS cache
 alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder' # Show hidden files
 alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'  # Hide hidden files
 alias dsclean='find . -name ".DS_Store" -delete' # Remove .DS_Store files
+
+# Set docker aliases
+alias cdkr='cd ~/docker'
+alias down='docker compose down -v'
+alias up='docker compose up -d'
+alias inspect='docker inspect'
+alias del='docker rm'
+alias logs='docker logs -f'
+alias ddf='docker system df'
+alias dlist='docker ps -a --format "table {{.Names}}"'
