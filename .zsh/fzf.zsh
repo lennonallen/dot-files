@@ -62,3 +62,16 @@ bookmark() {
     fi
 }
 
+
+app() {
+    local apps_file="${MY_FOLDER:-$HOME/my-folder}/apps.txt"
+    if [[ ! -f "$apps_file" ]]; then
+        echo "Error: apps file not found at $apps_file" >&2
+        return 1
+    fi
+    local selected
+    selected=$(cat -n "$apps_file" | fzf | awk '{print $2}')
+    if [[ -n "$selected" ]]; then
+        open "$selected"
+    fi
+}

@@ -92,3 +92,7 @@ alias del='docker rm'
 alias logs='docker logs -f'
 alias ddf='docker system df'
 alias dlist='docker ps -a --format "table {{.Names}}"'
+
+
+#ranger 
+alias cdr='ranger-cd'

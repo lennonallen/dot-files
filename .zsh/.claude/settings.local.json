@@ -5,7 +5,8 @@
       "Read(//Users/lennonallen/dotfiles/**)",
       "Read(//Users/lennonallen/dotfiles/**)",
       "Read(//Users/lennonallen/dotfiles/**)",
-      "Read(//Users/lennonallen/dotfiles/**)"
+      "Read(//Users/lennonallen/dotfiles/**)",
+      "Read(/Users/lennonallen/dotfiles/**)"
     ],
     "deny": [],
     "ask": []
