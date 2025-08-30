@@ -147,3 +147,17 @@ server-sync() {
         return 1
     fi
 }
+# cd into chosen dir with ranger
+ ranger-cd() {
+      temp_file="/Users/lennonallen/temp-directories/ranger_cd_$(date +%s)_$$"
+      ranger --choosedir="$temp_file" -- "${@:-$PWD}"
+
+      if [ -s "$temp_file" ]; then
+          # Remove line numbers and tabs that might be added
+          chosen_dir="$(cat "$temp_file" | sed 's/^[[:space:]]*[0-9]*[[:space:]]*//g' | tr -d '\t\n\r')"
+          if [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ] && [ -d "$chosen_dir" ]; then
+              cd "$chosen_dir"
+          fi
+      fi
+      rm -f -- "$temp_file"
+  }
