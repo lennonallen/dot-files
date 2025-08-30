@@ -31,7 +31,7 @@ alias gca='git commit -a'
 alias gcam='git commit -am'
 alias gcf='git commit --fixup'
 alias gcs='git commit -S'  # Signed commit
-alias gitdate="git add -A && git commit -m 'Update: \$(date)'"
+alias gitdate="git add -A && git commit -m 'Update: $(date)'"
 
 # Git Diff and Show
 alias gd='git diff'
