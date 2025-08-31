@@ -95,4 +95,4 @@ alias dlist='docker ps -a --format "table {{.Names}}"'
 
 
 #ranger 
-alias cdr='ranger-cd'
+alias rr='ranger-cd'
