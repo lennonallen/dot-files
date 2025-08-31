@@ -3,7 +3,9 @@
     "allow": [
       "Bash(chmod:*)",
       "Bash(bash:*)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(grep:*)",
+      "Bash(unalias:*)"
     ],
     "deny": [],
     "ask": []

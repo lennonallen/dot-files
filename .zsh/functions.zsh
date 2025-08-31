@@ -161,3 +161,12 @@ server-sync() {
       fi
       rm -f -- "$temp_file"
   }
+
+# Enhanced rsync function with proper exclude file path
+rrsync() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: rrsync <destination>"
+        return 1
+    fi
+    rsync -av --delete --force --partial --progress --human-readable --exclude-from="/Users/lennonallen/dotfiles/.rsync_exclude" "$(pwd)" "$1"
+}
