@@ -23,7 +23,7 @@ alias ..='cd ..'
 alias home='cd ~ && clear'
 alias desk='cd ~/Desktop'
 alias docs='cd ~/Documents'
-alias down='cd ~/Downloads'
+alias downloads='cd ~/Downloads'
 alias cdl='cd "$1" && ls'          # CD and list contents
 
 # Directory operations
@@ -96,3 +96,4 @@ alias dlist='docker ps -a --format "table {{.Names}}"'
 
 #ranger 
 alias rr='ranger-cd'
+alias opn="open $(PWD)"
